@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Local Wiki AI</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <button id="newChatBtn" class="new-chat-btn">+ New chat</button>
+      <div id="sessionList" class="session-list"></div>
+      <div class="sidebar-footer">
+        <span id="statusDot" class="status-dot"></span>
+        <span id="statusText">checking model...</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div id="messages" class="messages">
+        <div class="empty-state" id="emptyState">
+          <h1>Local Wiki AI</h1>
+          <p>Chatting with Qwen2.5 (local) &mdash; grounded in your wiki database.</p>
+        </div>
+      </div>
+
+      <form id="chatForm" class="chat-form">
+        <textarea
+          id="messageInput"
+          placeholder="Message Local Wiki AI..."
+          rows="1"
+          autofocus
+        ></textarea>
+        <button type="submit" id="sendBtn">Send</button>
+      </form>
+    </main>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

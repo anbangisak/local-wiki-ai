@@ -1,0 +1,24 @@
+# Local Wiki AI configuration
+# Edit wiki_db.path below to point at your existing SQLite file on disk.
+
+ollama:
+  host: "http://localhost:11434"
+  model: "qwen2.5:14b"
+  temperature: 0.7
+  num_ctx: 8192
+
+# External, read-only knowledge-base database (e.g. a wiki export).
+# Can live anywhere on disk - path is read from this config, not hardcoded.
+wiki_db:
+  enabled: true
+  path: "C:\\Users\\ggk767\\guna\\codes\\local-confluence\\data\\pages\\pages.db"
+  search_limit_per_table: 5
+  max_context_chars: 4000
+
+# Local database that stores chat sessions + message history.
+chat_history:
+  path: "./data/chat_history.db"
+
+server:
+  host: "127.0.0.1"
+  port: 8000
