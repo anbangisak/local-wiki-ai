@@ -184,6 +184,32 @@ html, body {
 }
 
 /* Chat input */
+.composer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stop-generating-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #40414f;
+  color: #ececf1;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 8px 14px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.stop-generating-btn:hover {
+  background: #4b4c5a;
+}
+.stop-generating-btn[hidden] {
+  display: none;
+}
+
 .chat-form {
   display: flex;
   gap: 8px;

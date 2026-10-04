@@ -3,17 +3,17 @@
 
 ollama:
   host: "http://localhost:11434"
-  model: "qwen2.5:14b"
+  model: "llama3.1:8b"
   temperature: 0.7
-  num_ctx: 8192
+  num_ctx: 32768
 
 # External, read-only knowledge-base database (e.g. a wiki export).
 # Can live anywhere on disk - path is read from this config, not hardcoded.
 wiki_db:
   enabled: true
-  path: "C:\\Users\\ggk767\\guna\\codes\\local-confluence\\data\\pages\\pages.db"
-  search_limit_per_table: 5
-  max_context_chars: 4000
+  path: "/home/guna/project/local-confluence/data/pages/pages.db"
+  search_limit_per_table: 50
+  max_context_chars: 24000
 
 # Local database that stores chat sessions + message history.
 chat_history:

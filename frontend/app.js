@@ -3,6 +3,7 @@ const emptyState = document.getElementById("emptyState");
 const chatForm = document.getElementById("chatForm");
 const messageInput = document.getElementById("messageInput");
 const sendBtn = document.getElementById("sendBtn");
+const stopBtn = document.getElementById("stopBtn");
 const sessionListEl = document.getElementById("sessionList");
 const newChatBtn = document.getElementById("newChatBtn");
 const statusDot = document.getElementById("statusDot");
@@ -10,6 +11,7 @@ const statusText = document.getElementById("statusText");
 
 let currentSessionId = null;
 let isStreaming = false;
+let activeAbortController = null;
 
 async function api(path, options = {}) {
   const res = await fetch(path, {
@@ -130,6 +132,8 @@ async function sendMessage(text) {
   const sessionId = await ensureSession();
   isStreaming = true;
   sendBtn.disabled = true;
+  stopBtn.hidden = false;
+  activeAbortController = new AbortController();
 
   addMessageRow("user", text);
   const assistantContentEl = addMessageRow("assistant", "");
@@ -142,6 +146,7 @@ async function sendMessage(text) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ session_id: sessionId, message: text }),
+      signal: activeAbortController.signal,
     });
     if (!res.ok || !res.body) {
       const body = await res.json().catch(() => ({}));
@@ -161,14 +166,26 @@ async function sendMessage(text) {
     }
     cursor.remove();
   } catch (err) {
-    assistantContentEl.textContent = `Error: ${err.message}`;
     cursor.remove();
+    if (err.name === "AbortError") {
+      assistantContentEl.textContent += " [stopped]";
+    } else {
+      assistantContentEl.textContent = `Error: ${err.message}`;
+    }
   } finally {
     isStreaming = false;
     sendBtn.disabled = false;
+    stopBtn.hidden = true;
+    activeAbortController = null;
     await loadSessions(); // refresh auto-generated title
   }
 }
+
+function stopStreaming() {
+  activeAbortController?.abort();
+}
+
+stopBtn.addEventListener("click", stopStreaming);
 
 chatForm.addEventListener("submit", (e) => {
   e.preventDefault();

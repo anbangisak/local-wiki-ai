@@ -25,15 +25,18 @@
         </div>
       </div>
 
-      <form id="chatForm" class="chat-form">
-        <textarea
-          id="messageInput"
-          placeholder="Message Local Wiki AI..."
-          rows="1"
-          autofocus
-        ></textarea>
-        <button type="submit" id="sendBtn">Send</button>
-      </form>
+      <div class="composer">
+        <button type="button" id="stopBtn" class="stop-generating-btn" hidden>⏹ Stop generating</button>
+        <form id="chatForm" class="chat-form">
+          <textarea
+            id="messageInput"
+            placeholder="Message Local Wiki AI..."
+            rows="1"
+            autofocus
+          ></textarea>
+          <button type="submit" id="sendBtn">Send</button>
+        </form>
+      </div>
     </main>
   </div>
 
